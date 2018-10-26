@@ -9,15 +9,12 @@
     <fragment
         android:id="@+id/fragment_bottom_left"
         android:name="com.sadikul.observerpattern.Fragments.PlusOneFragment"
-        android:layout_width="175dp"
+        android:layout_width="193dp"
         android:layout_height="100dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginEnd="9dp"
-        android:layout_marginRight="9dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/fragment2_bottom_right"
         app:layout_constraintStart_toStartOf="parent" />
 
     <fragment
@@ -44,7 +41,8 @@
         android:layout_marginRight="14dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Write something"
+        android:imeOptions="actionDone"
+        android:hint="Write something"
         app:layout_constraintEnd_toStartOf="@+id/button_submit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

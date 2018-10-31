@@ -1,5 +1,7 @@
 package com.sadikul.observerpattern.ObserverPattern;
 
+import java.util.Observable;
+
 public interface Subject {
     //methods to register and unregister observers
     public void register(Observer obj);
@@ -10,4 +12,5 @@ public interface Subject {
 
     //method to get updates from subject
     public Object getUpdate(Observer obj);
+
 }

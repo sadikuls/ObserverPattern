@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.sadikul.observerpattern.CustomObserver.CustomObservable;
+import com.sadikul.observerpattern.CustomObserver.CustomObserver;
 import com.sadikul.observerpattern.ObserverPattern.Observer;
 import com.sadikul.observerpattern.ObserverPattern.Subject;
 import com.sadikul.observerpattern.R;
@@ -19,9 +21,9 @@ import com.sadikul.observerpattern.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentTwo extends Fragment implements Observer {
+public class FragmentTwo extends Fragment implements CustomObserver {
     private Subject topic;
-    public static TextView fragTwoText;
+    public TextView fragTwoText;
     public static final String TAG = "<<TAGFragmentTwo>>";
 
     public FragmentTwo() {
@@ -37,7 +39,7 @@ public class FragmentTwo extends Fragment implements Observer {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_fragment_two, container, false);
 
-
+        CustomObservable.getmInstance().register(this);
         return view;
     }
 
@@ -50,27 +52,19 @@ public class FragmentTwo extends Fragment implements Observer {
 
     }
 
+
+
     @Override
-    public void update() {
-
-        String msg = (String) topic.getUpdate(this);
-
-        Log.d(TAG,msg);
-
-        if(msg == null){
+    public void update(CustomObserver obj, String message) {
+        if(message == null){
             System.out.println(TAG+":: No new message");
         }else {
             if(this.fragTwoText != null){
-                this.fragTwoText.setText(msg);
+                this.fragTwoText.setText(message);
             }else{
                 System.out.println(TAG+":: null object") ;
             }
 
         }
-    }
-
-    @Override
-    public void setSubject(Subject sub) {
-        this.topic = sub;
     }
 }

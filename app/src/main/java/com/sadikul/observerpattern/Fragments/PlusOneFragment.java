@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.android.gms.plus.PlusOneButton;
+import com.sadikul.observerpattern.CustomObserver.CustomObservable;
+import com.sadikul.observerpattern.CustomObserver.CustomObserver;
 import com.sadikul.observerpattern.ObserverPattern.Observer;
 import com.sadikul.observerpattern.ObserverPattern.Subject;
 import com.sadikul.observerpattern.R;
@@ -23,7 +25,7 @@ import com.sadikul.observerpattern.R;
  * Use the {@link PlusOneFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PlusOneFragment extends Fragment  implements Observer {
+public class PlusOneFragment extends Fragment implements CustomObserver {
     private Subject topic;
 
     public static final String TAG = "<<TAGFragmentOne>>";
@@ -50,7 +52,7 @@ public class PlusOneFragment extends Fragment  implements Observer {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_plus_one, container, false);
-
+        CustomObservable.getmInstance().register(this);
         //Find the +1 button
         tvFragmentOne = view.findViewById(R.id.fragment_one_text);
 
@@ -79,27 +81,25 @@ public class PlusOneFragment extends Fragment  implements Observer {
         super.onDetach();
     }
 
+
+
+
+
     @Override
-    public void update() {
-        String msg = (String) topic.getUpdate(this);
+    public void update(CustomObserver obj, String message) {
 
-        Log.d(TAG,msg);
+        Log.d(TAG,message);
 
-        if(msg == null){
+        if(message == null){
             System.out.println(TAG+":: No new message");
         }else {
             if(this.tvFragmentOne != null){
-                this.tvFragmentOne.setText(msg);
+                this.tvFragmentOne.setText(message);
             }else{
                 System.out.println(TAG+":: null object") ;
             }
 
         }
-    }
-
-    @Override
-    public void setSubject(Subject sub) {
-        this.topic = sub;
     }
 
     /**

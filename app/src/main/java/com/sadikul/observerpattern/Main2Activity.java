@@ -5,11 +5,14 @@ import android.content.Context;
 import android.drm.DrmStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.sadikul.observerpattern.CustomObserver.CustomObservable;
 import com.sadikul.observerpattern.Fragments.FragmentTwo;
 import com.sadikul.observerpattern.Fragments.PlusOneFragment;
 import com.sadikul.observerpattern.ObserverPattern.MyTopic;
@@ -31,10 +34,11 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         inputEdittext = findViewById(R.id.editText_input_text);
-        btnSubmit = findViewById(R.id.button_submit);
 
 
 
+
+/*
         //create observers
         Observer obj1 = new MyTopicSubscriber("Obj1");
         Observer obj2 = new FragmentTwo();
@@ -49,6 +53,7 @@ public class Main2Activity extends AppCompatActivity {
         obj1.setSubject(topic);
         obj2.setSubject(topic);
         obj3.setSubject(topic);
+*/
 
 
      /*   //check if any update is available
@@ -56,15 +61,24 @@ public class Main2Activity extends AppCompatActivity {
         obj2.update();
         obj3.update();*/
 
-
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
+        inputEdittext.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v) {
-                //now send message to subject
-                topic.postMessage(inputEdittext.getText().toString());
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                CustomObservable.getmInstance().postMessage(inputEdittext.getText().toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
 
             }
         });
+
 
 
     }

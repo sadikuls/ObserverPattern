@@ -10,6 +10,7 @@ public class CustomObservable {
     private static final String TAG = "<<customOB>>";
     private Context mContext = null;
     private List<CustomObserver> observers = new ArrayList<>();;
+
     private static CustomObservable mInstance = null;
     private boolean changed = false;
     private String message = null;
@@ -20,6 +21,7 @@ public class CustomObservable {
     }
 
     public static CustomObservable getmInstance() {
+
         if( null == mInstance){
             mInstance = new CustomObservable();
         }
